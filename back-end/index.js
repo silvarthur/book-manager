@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/my-library-manager-db');
 var db = mongoose.connection;
 
+app.use(bodyParser.json());
+
 //Models
 var Book = require('./models/book');
 
@@ -26,8 +28,45 @@ app.get('/books', function(req, res) {
     });
 });
 
+app.post('/books', function(req, res) {
+    var book = req.body;
+
+    Book.addBook(book, function(err, book ) {
+        if(err) {
+            throw err;
+        } else {
+            res.json(book);
+        }
+    });
+});
+
 app.get('/books/:id', function(req, res) {
     Book.getBookById(req.params.id, function(err, book) {
+        if(err) {
+            throw err;
+        } else {
+            res.json(book);
+        }
+    });
+});
+
+app.put('/books/:id', function(req, res) {
+    var id = req.params.id;
+    var book = req.body;
+
+    Book.updateBook(id, book, {}, function(err, book) {
+        if(err) {
+            throw err;
+        } else {
+            res.json(book);
+        }
+    });
+});
+
+app.delete('/books/:id', function(req, res) {
+    var id = req.params.id;
+
+    Book.removeBook(id, function(err, book) {
         if(err) {
             throw err;
         } else {
