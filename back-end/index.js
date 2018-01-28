@@ -10,70 +10,10 @@ var db = mongoose.connection;
 
 app.use(bodyParser.json());
 
-//Models
-var Book = require('./models/book');
+//Routes
+var book = require('./routes/book.routes');
 
-//Setup the route for the home page
-app.get('/', function(req, res) {
-    res.send('Hello, man!');
-});
-
-app.get('/books', function(req, res) {
-    Book.getBooks(function(err, books) {
-        if(err) {
-            throw err;
-        } else {
-            res.json(books);
-        }
-    });
-});
-
-app.post('/books', function(req, res) {
-    var book = req.body;
-
-    Book.addBook(book, function(err, book ) {
-        if(err) {
-            throw err;
-        } else {
-            res.json(book);
-        }
-    });
-});
-
-app.get('/books/:id', function(req, res) {
-    Book.getBookById(req.params.id, function(err, book) {
-        if(err) {
-            throw err;
-        } else {
-            res.json(book);
-        }
-    });
-});
-
-app.put('/books/:id', function(req, res) {
-    var id = req.params.id;
-    var book = req.body;
-
-    Book.updateBook(id, book, {}, function(err, book) {
-        if(err) {
-            throw err;
-        } else {
-            res.json(book);
-        }
-    });
-});
-
-app.delete('/books/:id', function(req, res) {
-    var id = req.params.id;
-
-    Book.removeBook(id, function(err, book) {
-        if(err) {
-            throw err;
-        } else {
-            res.json(book);
-        }
-    });
-});
+app.use('/', book);
 
 app.listen(3000);
 console.log("Running on port 3000...");

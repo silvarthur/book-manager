@@ -31,6 +31,7 @@ var bookSchema = mongoose.Schema({
 
 var Book = module.exports = mongoose.model('Book', bookSchema);
 
+/*
 //Gets all the books. This is temporary.
 module.exports.getBooks = function(callback, limit) {
     Book.find(callback).limit(limit);
@@ -66,3 +67,4 @@ module.exports.deleteBook = function(id, callback) {
     var query = {id: id};
     Book.remove(query, callback);
 }
+*/
