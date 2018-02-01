@@ -1,3 +1,20 @@
-<p>
-  login works!
-</p>
+<html>
+  <head>
+    <title>My Library Manager - Login</title>
+  </head>
+  <body>
+    <mat-toolbar id="page-header">Login</mat-toolbar>
+
+    <form id="login-form">
+      <mat-form-field class="full-width">
+        <input matInput type="text" id="email-field" placeholder="Email" [(ngModel)] = "email" name="email">
+      </mat-form-field>
+    
+      <mat-form-field class="full-width">
+        <input matInput type="text" id="password-field" placeholder="Password" [(ngModel)] = "password" name="password">
+      </mat-form-field>
+    </form>
+
+    <button mat-raised-button color="primary" (click)='signIn()'>Sign In</button>
+  </body>
+</html>
